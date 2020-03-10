@@ -17,7 +17,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     
     // Set up SQLiteDatabase and Create the Database
     var databaseConfig = DatabasesConfig()
-    let db = try SQLiteDatabase(storage: .file(path: "portfolio.db"))
+    let db = try SQLiteDatabase(storage: .file(path: "\(directoryConfig.workDir)portfolio.db"))
     databaseConfig.add(database: db, as: .sqlite)
     services.register(databaseConfig)
     
