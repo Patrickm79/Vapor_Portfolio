@@ -8,7 +8,7 @@ import FluentSQLite
 import Foundation
 import Vapor
 
-struct Post: Content, SQLiteModel, Migration {
+struct Post: Content, SQLiteModel, Migration, Equatable, Hashable {
     var id: Int?
     var name: String
     var body: String
