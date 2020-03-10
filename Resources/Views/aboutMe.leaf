@@ -1,0 +1,23 @@
+<html>
+<body>
+<h1>Aboue Me</h1>
+
+<ul>
+    #for(post in posts) {
+    <li>#(post.name), #(post.body)</li>
+}
+</ul>
+
+
+<h2> Add new post</h2>
+<form method ="post" action"/add">
+<p>Name: <input type="text" name="name" /></p>
+<p>Body: <input type="text" name="body" /></p>
+<button type="submit">Add</button>
+</form>
+
+
+
+<body>
+<html>
+
