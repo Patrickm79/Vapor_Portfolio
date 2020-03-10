@@ -1,16 +1,26 @@
 import Vapor
 
+
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
-    // "It works" page
-    router.get { req in
-        return try req.view().render("welcome")
+    //
+    router.get { req -> Future<View> in
+        return try req.view().render("hello")
+    }
+
+    // Opens AboutMe HTML Page
+    router.get("aboutMe") { req -> Future<View> in
+        let post1 = Post(id: 1, name: "This is a Vapor web app about my portfolio", body: "My name is Patrick and I am a Lambda School student and TL")
+        return try req.view().render("aboutMe", ["posts": [post1]])
     }
     
-    // Says hello
-    router.get("hello", String.parameter) { req -> Future<View> in
-        return try req.view().render("hello", [
-            "name": req.parameters.next(String.self)
-        ])
-    }
+    // Adds a post to the DB
+    router.post(Post.self, at: "add") { req, post -> Future<Response> in
+        return post.save(on: req).map(to: Response.self) { post in
+            return req.redirect(to: "aboutMe")
+        }
+    } 
+    
+    
+    
 }
